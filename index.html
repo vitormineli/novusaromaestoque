@@ -20,8 +20,21 @@
 
             if (perfumesSalvos) perfumes = JSON.parse(perfumesSalvos);
             if (vendasSalvas) vendas = JSON.parse(vendasSalvas);
-            if (perfumeId) perfumeIdCounter = parseInt(perfumeId);
-            if (vendasId) vendasIdCounter = parseInt(vendasId);
+            
+            // Validate counters after parsing
+            if (perfumeId) {
+                const parsedPerfumeId = parseInt(perfumeId);
+                if (!isNaN(parsedPerfumeId)) {
+                    perfumeIdCounter = parsedPerfumeId;
+                }
+            }
+            
+            if (vendasId) {
+                const parsedVendasId = parseInt(vendasId);
+                if (!isNaN(parsedVendasId)) {
+                    vendasIdCounter = parsedVendasId;
+                }
+            }
         }
 
     </script>
@@ -42,8 +55,21 @@
 
             if (perfumesSalvos) perfumes = JSON.parse(perfumesSalvos);
             if (vendasSalvas) vendas = JSON.parse(vendasSalvas);
-            if (perfumeId) perfumeIdCounter = parseInt(perfumeId);
-            if (vendasId) vendasIdCounter = parseInt(vendasId);
+            
+            // Validate counters after parsing
+            if (perfumeId) {
+                const parsedPerfumeId = parseInt(perfumeId);
+                if (!isNaN(parsedPerfumeId)) {
+                    perfumeIdCounter = parsedPerfumeId;
+                }
+            }
+            
+            if (vendasId) {
+                const parsedVendasId = parseInt(vendasId);
+                if (!isNaN(parsedVendasId)) {
+                    vendasIdCounter = parsedVendasId;
+                }
+            }
         }
 
     </script>
@@ -589,9 +615,29 @@
         function addPerfume() {
             const nome = document.getElementById('newNome').value.trim();
             const marca = document.getElementById('newMarca').value.trim();
-            const preco = parseFloat(document.getElementById('newPreco').value);
-            const estoque = parseInt(document.getElementById('newEstoque').value);
-            const ml = parseInt(document.getElementById('newMl').value);
+            const precoValue = document.getElementById('newPreco').value;
+            const estoqueValue = document.getElementById('newEstoque').value;
+            const mlValue = document.getElementById('newMl').value;
+            
+            const preco = parseFloat(precoValue);
+            const estoque = parseInt(estoqueValue);
+            const ml = parseInt(mlValue);
+            
+            // Validate numeric inputs
+            if (precoValue && isNaN(preco)) {
+                alert('O preço deve ser um número válido');
+                return;
+            }
+            
+            if (estoqueValue && isNaN(estoque)) {
+                alert('A quantidade em estoque deve ser um número válido');
+                return;
+            }
+            
+            if (mlValue && isNaN(ml)) {
+                alert('O volume (ml) deve ser um número válido');
+                return;
+            }
             const categoria = document.getElementById('newCategoria').value;
             const imagemInput = document.getElementById('newImagem');
             
@@ -831,8 +877,24 @@
         // Calculate sale total
         function calculateSaleTotal() {
             const productId = document.getElementById('saleProduct').value;
-            const quantity = parseInt(document.getElementById('saleQuantity').value) || 1;
-            let price = parseFloat(document.getElementById('salePrice').value);
+            const quantityValue = document.getElementById('saleQuantity').value;
+            const priceValue = document.getElementById('salePrice').value;
+            
+            const quantity = parseInt(quantityValue) || 1;
+            let price = parseFloat(priceValue);
+            
+            // Validate numeric inputs
+            if (quantityValue && isNaN(quantity)) {
+                alert('A quantidade deve ser um número válido');
+                document.getElementById('saleQuantity').value = '1';
+                return;
+            }
+            
+            if (priceValue && isNaN(price)) {
+                alert('O preço deve ser um número válido');
+                document.getElementById('salePrice').value = '';
+                return;
+            }
             
             // If price is not set, use product price
             if (!price && productId) {
@@ -873,9 +935,30 @@
             if (!isCard) return;
             
             const totalText = document.getElementById('saleTotal').textContent;
+            const installmentsValue = document.getElementById('installments').value;
+            const feeValue = document.getElementById('cardFee').value;
+            
             const total = parseFloat(totalText.replace('R$ ', '').replace(',', '.'));
-            const installments = parseInt(document.getElementById('installments').value);
-            const fee = parseFloat(document.getElementById('cardFee').value) || 0;
+            const installments = parseInt(installmentsValue);
+            const fee = parseFloat(feeValue) || 0;
+            
+            // Validate numeric inputs
+            if (isNaN(total)) {
+                alert('O valor total não é um número válido');
+                return;
+            }
+            
+            if (installmentsValue && isNaN(installments)) {
+                alert('O número de parcelas deve ser um número válido');
+                document.getElementById('installments').value = '1';
+                return;
+            }
+            
+            if (feeValue && isNaN(fee)) {
+                alert('A taxa deve ser um número válido');
+                document.getElementById('cardFee').value = '0';
+                return;
+            }
             
             const feeAmount = total * (fee / 100);
             const finalTotal = total + feeAmount;
@@ -888,8 +971,22 @@
         // Process sale
         function processSale() {
             const productId = document.getElementById('saleProduct').value;
-            const quantity = parseInt(document.getElementById('saleQuantity').value) || 1;
-            const price = parseFloat(document.getElementById('salePrice').value);
+            const quantityValue = document.getElementById('saleQuantity').value;
+            const priceValue = document.getElementById('salePrice').value;
+            
+            const quantity = parseInt(quantityValue) || 1;
+            const price = parseFloat(priceValue);
+            
+            // Validate numeric inputs
+            if (quantityValue && isNaN(quantity)) {
+                alert('A quantidade deve ser um número válido');
+                return;
+            }
+            
+            if (!priceValue || isNaN(price)) {
+                alert('O preço deve ser um número válido');
+                return;
+            }
             const customerName = document.getElementById('customerName').value.trim();
             const customerPhone = document.getElementById('customerPhone').value.trim();
             const customerInstagram = document.getElementById('customerInstagram').value.trim();
@@ -1180,8 +1277,21 @@
 
             if (perfumesSalvos) perfumes = JSON.parse(perfumesSalvos);
             if (vendasSalvas) vendas = JSON.parse(vendasSalvas);
-            if (perfumeId) perfumeIdCounter = parseInt(perfumeId);
-            if (vendasId) vendasIdCounter = parseInt(vendasId);
+            
+            // Validate counters after parsing
+            if (perfumeId) {
+                const parsedPerfumeId = parseInt(perfumeId);
+                if (!isNaN(parsedPerfumeId)) {
+                    perfumeIdCounter = parsedPerfumeId;
+                }
+            }
+            
+            if (vendasId) {
+                const parsedVendasId = parseInt(vendasId);
+                if (!isNaN(parsedVendasId)) {
+                    vendasIdCounter = parsedVendasId;
+                }
+            }
         }
 
     </script>

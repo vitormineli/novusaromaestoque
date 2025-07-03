@@ -1,1 +1,2 @@
 # novusaromaestoque
+<!-- This is a perfume inventory management system. "Novus Aroma Estoque" is Latin-Portuguese for "New Scent Inventory" - a web-based application that helps track perfume inventory, manage sales, and record customer information. -->
